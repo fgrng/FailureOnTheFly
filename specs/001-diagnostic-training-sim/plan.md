@@ -1,4 +1,4 @@
-# Implementation Plan: Diagnostisches Gesprächstraining
+# Implementation Plan: FailureOnTheFly
 
 **Branch**: `001-diagnostic-training-sim` | **Date**: 2026-03-10 | **Spec**: [spec.md](spec.md)
 **Input**: Feature specification from `/specs/001-diagnostic-training-sim/spec.md`

@@ -1,4 +1,4 @@
-# Quickstart: Diagnostisches Gesprächstraining
+# Quickstart: FailureOnTheFly
 
 **Feature**: 001-diagnostic-training-sim
 

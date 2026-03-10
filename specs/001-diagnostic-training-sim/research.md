@@ -1,4 +1,4 @@
-# Research: Diagnostisches Gesprächstraining
+# Research: FailureOnTheFly
 
 **Date**: 2026-03-10
 **Feature**: 001-diagnostic-training-sim

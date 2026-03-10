@@ -129,7 +129,7 @@ def handle_input(prompt_text=None, audio_data=None, task=None):
         # Streamlit will naturally update the UI after this function completes
 
 def main():
-    st.set_page_config(page_title="Diagnostisches Gesprächstraining", layout="centered")
+    st.set_page_config(page_title="FailureOnTheFly", layout="centered")
     init_session_state()
     
     if not st.session_state.tasks:

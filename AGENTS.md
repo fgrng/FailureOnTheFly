@@ -1,52 +1,49 @@
-# CLAUDE.md
+# FailureOnTheFly: AI Agents & Roles
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This document defines the roles and responsibilities of the AI agents (Gemini CLI, Claude Code, etc.) within the FailureOnTheFly project. This project follows **Specify-Driven Development (SDD)**, where AI agents act as specialized partners throughout the development lifecycle.
 
-## Project Overview
+## 🤖 Principal Agent: Gemini CLI
 
-FailureOnTheFly is a Specify-Driven Development (SDD) template repository. It provides a methodology framework for AI-assisted software development — not application code. It is language/framework agnostic and ready to bootstrap any project.
+The Gemini CLI acts as the **Lead Engineer** and **Architect**. It is responsible for:
+- **Research**: Investigating the existing codebase and specs.
+- **Strategy**: Proposing architectural changes based on specifications.
+- **Execution**: Implementing features and fixing bugs while adhering to SDD principles.
+- **Validation**: Ensuring that all changes are verified through tests and align with the `Success Criteria` (SC) in the specs.
 
-## Repository Structure
+### Command Capabilities (`/speckit.*`)
+Gemini CLI utilizes specialized commands defined in `.gemini/commands/` to maintain the SDD workflow:
+- `/speckit.specify`: Drafts new feature specifications (`spec.md`).
+- `/speckit.plan`: Formulates architectural strategies (`plan.md`).
+- `/speckit.tasks`: Generates atomic, testable task lists (`tasks.md`).
+- `/speckit.implement`: Executes specific tasks and updates the task list.
+- `/speckit.analyze`: Performs deep-dive root cause analysis.
+- `/speckit.checklist`: Generates quality assurance checklists.
 
-- `.claude/commands/` — 9 custom Claude commands implementing the SDD workflow
-- `.specify/templates/` — Document templates (spec, plan, tasks, checklist, constitution, agent-file)
-- `.specify/scripts/bash/` — Automation scripts (common.sh, setup-plan.sh, check-prerequisites.sh, create-new-feature.sh, update-agent-context.sh)
-- `specs/[NNN-feature-name]/` — Feature specifications created during development (spec.md, plan.md, tasks.md, research.md, data-model.md, contracts/, checklists/)
-- `.specify/memory/constitution.md` — Project governance principles (created once)
+## 🧑‍💻 SDD Roles
 
-## SDD Workflow
+Regardless of which AI tool is used, the workflow assumes the following specialized roles:
 
-The core workflow follows this sequence:
+| Role | Responsibility | Key Output |
+| :--- | :--- | :--- |
+| **Specifier** | Defines *what* to build based on user requirements. | `spec.md` |
+| **Planner** | Defines *how* to build it (architecture, tech stack). | `plan.md` |
+| **Task Master** | Breaks down the plan into small, executable units. | `tasks.md` |
+| **Implementer** | Writes the code, following the plan and tasks. | Code + Tests |
+| **Validator** | Verifies that the implementation meets all requirements. | Passing Tests |
 
-```
-constitution → specify → clarify → plan → tasks → analyze → implement
-```
+## 📐 Interaction Standards
 
-Each phase has a corresponding `/speckit.*` command. Checklist generation is available at any phase.
+1. **Context First**: Always read the relevant `specs/` directory before starting any implementation.
+2. **Persistence**: Never assume a state from a previous session; always verify the current state of `tasks.md`.
+3. **Traceability**: Link implementation changes to specific Requirement IDs (e.g., `FR-001`) or User Stories (e.g., `US1`).
+4. **Validation Rigor**: No task is considered "Done" without empirical verification (automated test or manual verification script).
 
-## Key Conventions
+## 🛠 Active Tools & Scripts
 
-- **Feature branches**: `[NNN]-[short-name]` (e.g., `001-user-auth`)
-- **Spec directories**: `specs/[NNN-feature-name]/`
-- **Task IDs**: `T001`, `T002`, etc. with `[P]` marker for parallelizable tasks and `[US1]` for user story association
-- **Requirements IDs**: `FR-001`, `FR-002` (functional), `SC-001`, `SC-002` (success criteria)
-- **User stories**: Prioritized as P1, P2, P3; each independently implementable and testable
-- **Acceptance scenarios**: Given/When/Then format
+Agents should leverage the following internal scripts for automation:
+- `.specify/scripts/bash/create-new-feature.sh`: Scaffolds a new feature spec directory.
+- `.specify/scripts/bash/setup-plan.sh`: Initializes a development plan.
+- `.specify/scripts/bash/check-prerequisites.sh`: Verifies the environment for a feature.
 
-## Scripts
-
-All scripts in `.specify/scripts/bash/` support `--json` for machine-readable output. Key environment variables:
-- `SPECIFY_FEATURE` — Override current feature detection (useful in non-git repos)
-
-## No Build System
-
-This is intentionally a pure template. There is no package.json, build tooling, testing framework, or CI/CD configuration. These are added per-feature during implementation.
-
-## Active Technologies
-- Python 3.11+ + FastAPI, instructor, openai, pydantic, uvicorn, python-multipart (001-diagnostic-training-sim)
-- In-memory (Python dict) — prototype scope, no database (001-diagnostic-training-sim)
-- Python 3.11+ + streamlit, instructor, openai, pydantic (001-diagnostic-training-sim)
-- In-memory (Streamlit session state) — prototype scope, no database (001-diagnostic-training-sim)
-
-## Recent Changes
-- 001-diagnostic-training-sim: Added Python 3.11+ + FastAPI, instructor, openai, pydantic, uvicorn, python-multipart
+---
+*For Claude-specific instructions, see `CLAUDE.md`. For project-wide mandates, see `GEMINI.md`.*

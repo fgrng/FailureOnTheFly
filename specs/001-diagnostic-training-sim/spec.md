@@ -1,4 +1,4 @@
-# Feature Specification: Diagnostisches Gesprächstraining
+# Feature Specification: FailureOnTheFly
 
 **Feature Branch**: `001-diagnostic-training-sim`
 **Created**: 2026-03-09
