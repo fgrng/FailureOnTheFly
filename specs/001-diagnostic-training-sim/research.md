@@ -39,20 +39,24 @@
 - Browser Web Speech API: Not available in Streamlit (no direct JS access).
 - Self-hosted Whisper: Added infrastructure complexity, not justified for a prototype.
 
-## Decision 3: Audio Recording via Streamlit Native Widgets
+## Decision 3: Audio Recording Strategy
 
-**Decision**: Use Streamlit's built-in `st.audio_input()` and/or `st.chat_input(accept_audio=True)`.
+**Decision**: Primary use of `st.chat_input(accept_audio=True)`. Fallback: `st.audio_input()` with a UI toggle.
 
 **Rationale**:
-- `st.audio_input()` — native Streamlit widget, returns `UploadedFile` (WAV, 16 kHz), directly usable with Whisper API.
-- `st.chat_input(accept_audio=True)` — adds mic button directly in chat input bar; return object has `.text` and `.audio` attributes for dual-channel support.
-- No MediaRecorder API, custom JavaScript, or browser compatibility concerns.
-- WAV format accepted natively by Whisper API — zero conversion.
+- `st.chat_input(accept_audio=True)` is the cleanest UX but requires Streamlit 1.40.0+.
+- Fallback ensures compatibility: A toggle (`st.toggle`) switches between text and audio input.
+- `st.audio_input()` returns WAV, which is natively supported by Whisper.
+- No custom JS or external components required in either case.
 
-**Alternatives considered**:
-- MediaRecorder API via custom Streamlit component: Unnecessary since native widgets exist.
-- streamlit-webrtc: Designed for real-time streaming; overkill for record-then-submit workflow.
-- Third-party streamlit-audio-recorder: Adds external dependency for functionality now built into Streamlit.
+## Decision 7: Thinking Indicator
+
+**Decision**: Use `st.spinner("Schüler denkt nach...")` or `st.status` during the LLM request.
+
+**Rationale**:
+- LLM latency can be up to 5 seconds.
+- Visual feedback prevents the user from thinking the app is frozen.
+- Improves perceived performance and matches SC-002.
 
 ## Decision 4: Session/Conversation Management
 

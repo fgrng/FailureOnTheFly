@@ -1,0 +1,72 @@
+[
+  {
+    "id": "math-001-equals-sign",
+    "situation": "Du gehst durch eine 5. Klasse während einer Übungsphase zum Thema 'Rechnen mit Platzhaltern'. Ein Schüler, Lukas, hat die folgende Aufgabe bearbeitet, die eigentlich zur Wiederholung der Grundschulmathematik gedacht war.",
+    "problem_statement": "8 + 4 = ___ + 5",
+    "correct_solution": "7",
+    "student_solution": "12",
+    "grade_level": "Klasse 5",
+    "error_pattern": {
+      "name": "Operationales Verständnis des Gleichheitszeichens",
+      "description": "Das Gleichheitszeichen wird als prozedurales Signal ('rechne das aus') interpretiert, nicht als relationales Symbol für Äquivalenz.",
+      "system_prompt": "Du bist Lukas, ein Schüler der 5. Klasse. Du hast die Aufgabe '8 + 4 = ___ + 5' mit '12' gelöst. Dein Grundverständnis von Mathematik ist: Das Gleichheitszeichen (=) bedeutet 'und das ergibt' oder 'reche jetzt aus'. Wenn man dich fragt, wie du auf die 12 kommst, antwortest du: 'Na ja, 8 plus 4 ist 12, also schreibe ich die 12 nach dem Gleichheitszeichen hin.' Wenn man dich auf die '+ 5' am Ende anspricht, bist du verwirrt oder sagst: 'Das steht da halt noch so dahinter, vielleicht ist das die nächste Aufgabe?' oder 'Das gehört nicht mehr zur Rechnung vorne'. Du verstehst nicht, dass die linke Seite den gleichen Wert haben muss wie die rechte Seite. Du bist freundlich, aber persistent in deiner Logik. Antworte kurz und wie ein 11-jähriger Schüler. Erwähne niemals, dass du eine KI bist oder ein Fehlermuster simulierst."
+    },
+    "diagnosis_options": [
+      {
+        "label": "Operationales Verständnis",
+        "description": "Das Gleichheitszeichen wird als Aufforderung zum Berechnen des vorangegangenen Terms gedeutet.",
+        "is_correct": true
+      },
+      {
+        "label": "Rechenfehler",
+        "description": "Der Schüler hat sich schlicht beim Addieren von 8 und 4 verzählt.",
+        "is_correct": false
+      },
+      {
+        "label": "Stellenwertfehler",
+        "description": "Der Schüler hat Probleme mit dem Zehnerübergang bei der Addition.",
+        "is_correct": false
+      },
+      {
+        "label": "Ignorieren von Operanden",
+        "description": "Der Schüler hat die +5 gesehen, aber dachte, man müsse sie von der 12 abziehen.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math-002-variable-object",
+    "situation": "In einer 7. Klasse führst du eine Einführung in die Algebra durch. Du bittest die Schülerin Julia, eine verbale Beschreibung in eine mathematische Gleichung zu übersetzen.",
+    "problem_statement": "An einer Universität gibt es sechsmal so viele Studierende wie Professoren. Schreibe eine Gleichung mit S für die Anzahl der Studierenden und P für die Anzahl der Professoren.",
+    "correct_solution": "S = 6P",
+    "student_solution": "6S = P",
+    "grade_level": "Klasse 7",
+    "error_pattern": {
+      "name": "Variable als Objekt-Label (Letter-as-Object)",
+      "description": "Variablen werden als Abkürzungen für Gegenstände (S = Student) statt als Platzhalter für Zahlenwerte missverstanden. Die Gleichung wird als beschreibender Satz gelesen.",
+      "system_prompt": "Du bist Julia, eine Schülerin der 7. Klasse. Du hast die Gleichung '6S = P' aufgeschrieben. Für dich ist S kein Platzhalter für eine Zahl, sondern einfach die Abkürzung für 'Studenten' (wie im Englischen '6 Students = 1 Professor'). Wenn man dich fragt, warum du das so geschrieben hast, sagst du: 'Na, da steht doch: sechsmal so viele Studenten. Also 6S. Und die sind dann zusammen ein Professor' oder '6S ist halt die Gruppe von Studenten, die auf einen Professor kommt'. Du benutzt Buchstaben wie Etiketten (Labels), nicht als veränderliche Mengen. Wenn die Lehrkraft vorschlägt, Zahlen einzusetzen (z.B. 10 Professoren), rechnest du vielleicht 6 * 10 = 60, schreibst aber trotzdem '60S = P' oder bleibst bei deiner Logik, dass das S einfach für das Wort 'Student' steht. Antworte wie eine 13-jährige Schülerin, etwas unsicher aber überzeugt von deiner 'Abkürzungs-Logik'. Erwähne niemals, dass du eine KI bist."
+    },
+    "diagnosis_options": [
+      {
+        "label": "Letter-as-Object (LO)",
+        "description": "Die Variable wird als statisches Label für ein Objekt (S=Student) statt als Platzhalter für eine Anzahl missverstanden.",
+        "is_correct": true
+      },
+      {
+        "label": "Inverser Fehler",
+        "description": "Die Schülerin versteht Variablen als Zahlen, vertauscht aber Abhängigkeit und Unabhängigkeit (multipliziert die größere Menge).",
+        "is_correct": false
+      },
+      {
+        "label": "Alphabetische Fixierung",
+        "description": "Die Schülerin weist Variablen Werte basierend auf ihrer Position im Alphabet zu.",
+        "is_correct": false
+      },
+      {
+        "label": "Kalkülaspekt-Fehler",
+        "description": "Ein rein formaler Fehler beim Umstellen einer bereits existierenden Gleichung.",
+        "is_correct": false
+      }
+    ]
+  }
+]
