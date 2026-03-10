@@ -128,8 +128,42 @@ def handle_input(prompt_text=None, audio_data=None, task=None):
         # We don't call st.rerun() here to avoid loop issues with audio_input
         # Streamlit will naturally update the UI after this function completes
 
+def check_password():
+    """Gibt True zurück, wenn das Passwort korrekt ist (aus .env: APP_PASSWORD)."""
+    password_env = os.getenv("APP_PASSWORD")
+    
+    # Falls kein Passwort gesetzt ist, überspringen wir den Check (Entwicklung)
+    if not password_env:
+        return True
+
+    def password_entered():
+        if st.session_state["password"] == password_env:
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  # Passwort nicht im State lassen
+        else:
+            st.session_state["password_correct"] = False
+
+    if "password_correct" not in st.session_state:
+        # Erstmaliges Anzeigen des Login-Feldes
+        st.title("🔒 Zugang geschützt")
+        st.text_input("Passwort eingeben", type="password", on_change=password_entered, key="password")
+        return False
+    elif not st.session_state["password_correct"]:
+        # Falsches Passwort
+        st.title("🔒 Zugang geschützt")
+        st.text_input("Passwort eingeben", type="password", on_change=password_entered, key="password")
+        st.error("😕 Passwort falsch.")
+        return False
+    else:
+        # Passwort korrekt
+        return True
+
 def main():
     st.set_page_config(page_title="FailureOnTheFly", layout="centered")
+    
+    if not check_password():
+        st.stop()
+        
     init_session_state()
     
     if not st.session_state.tasks:

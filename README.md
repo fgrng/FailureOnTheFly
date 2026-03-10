@@ -39,7 +39,7 @@ The application simulates a classroom situation where a student has made a speci
 3. Configure your environment:
    ```bash
    cp .env.example .env
-   # Add your OPENAI_API_KEY to .env
+   # Add your OPENAI_API_KEY and APP_PASSWORD to .env
    ```
 4. Run the application:
    ```bash
